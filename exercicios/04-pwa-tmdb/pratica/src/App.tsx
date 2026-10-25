@@ -12,6 +12,7 @@ export default function App() {
 
   return (
     <>
+      <UpdatePrompt />
       <HomeScreen
         activeTab={activeTab}
         isFavorite={isFavorite}

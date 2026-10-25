@@ -1,7 +1,6 @@
 // src/__tests__/unit/03-useFavorites.test.ts
-// ✅ AVALIATIVO — implemente os casos marcados com it.todo
-// 📘 MODELO: testes 1 e 2 estão prontos — leia antes de começar
-// 🧑‍💻 SEU TRABALHO: testes 3, 4 e 5 (1 pt cada)
+// 📘 MODELO — todos os casos já estão prontos. Leia o 5: ele testa a Badging API
+// (navigator.setAppBadge), o número no ícone do PWA instalado.
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
@@ -13,13 +12,11 @@ beforeEach(() => {
 });
 
 describe('useFavorites', () => {
-  // 📘 MODELO — leia e entenda antes de escrever os próximos
   it('1. começa sem favoritos', () => {
     const { result } = renderHook(() => useFavorites());
     expect(result.current.count).toBe(0);
   });
 
-  // 📘 MODELO
   it('2. toggle adiciona um id aos favoritos', () => {
     const { result } = renderHook(() => useFavorites());
     act(() => result.current.toggle(42));
