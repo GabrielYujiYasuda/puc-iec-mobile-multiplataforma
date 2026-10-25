@@ -32,23 +32,40 @@ const buttonStyle: React.CSSProperties = {
 
 export function UpdatePrompt() {
   const {
+    offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW();
 
-  if (!needRefresh) return null;
+  const closePrompt = () => {
+    setOfflineReady(false);
+    setNeedRefresh(false);
+  };
+
+  if (!offlineReady && !needRefresh) return null;
 
   return (
     <div role="status" style={promptStyle}>
-      <span>Uma nova versão está disponível.</span>
-      <span>
-        <button onClick={() => updateServiceWorker(true)} style={buttonStyle}>
-          Atualizar
-        </button>{' '}
-        <button onClick={() => setNeedRefresh(false)} style={buttonStyle}>
-          Agora não
+      {offlineReady ? (
+        <span>O app está pronto para uso offline.</span>
+      ) : (
+        <>
+          <span>Uma nova versão está disponível.</span>
+          <span>
+            <button onClick={() => updateServiceWorker(true)} style={buttonStyle}>
+              Atualizar
+            </button>{' '}
+            <button onClick={closePrompt} style={buttonStyle}>
+              Agora não
+            </button>
+          </span>
+        </>
+      )}
+      {offlineReady && (
+        <button onClick={closePrompt} style={buttonStyle}>
+          Fechar
         </button>
-      </span>
+      )}
     </div>
   );
 }
